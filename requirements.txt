@@ -3,3 +3,4 @@ gunicorn
 pytz
 BeautifulSoup4
 urllib3
+lxml

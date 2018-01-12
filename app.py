@@ -11,7 +11,7 @@ from datetime import datetime, timezone, timedelta
 
 # スクレイピング用ライブラリ
 import urllib.request
-from bs4 import BeautifulSoup	
+from bs4 import BeautifulSoup
 
 JST = timezone(timedelta(hours =+ 9), 'JST')
 

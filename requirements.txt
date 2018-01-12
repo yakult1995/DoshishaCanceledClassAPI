@@ -2,3 +2,4 @@ flask
 gunicorn
 pytz
 BeautifulSoup4
+urllib

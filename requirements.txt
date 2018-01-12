@@ -1,6 +1,6 @@
 flask
 gunicorn
 pytz
-BeautifulSoup4
+beautifulsoup4
 urllib3
 lxml

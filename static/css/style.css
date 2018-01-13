@@ -1,0 +1,19 @@
+@import url(https://fonts.googleapis.com/earlyaccess/sawarabimincho.css);
+
+body, html {
+	font-family: 'Sawarabi Mincho', Helvetica Neue, Helvetica, Hiragino Sans, 'ヒラギノ角ゴ ProN W3', Hiragino Kaku Gothic ProN, "メイリオ", Meiryo, sans-serif;
+	width: 100%;
+	text-align: center;
+}
+
+#title {
+	font-size: 1.5em;
+}
+
+#api_details {
+	margin: 10px;
+	border-style: solid;
+}
+
+#api_url {
+}

@@ -23,7 +23,7 @@ app.config['JSON_AS_ASCII'] = False
 # ルート
 @app.route('/')
 def index():
-	return 'index'
+	return render_template('index.html')
 
 # すべての教室の状況
 @app.route('/api/v1/<int:campus>')

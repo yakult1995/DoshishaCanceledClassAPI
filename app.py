@@ -21,12 +21,12 @@ app.config['DEBUG'] = True
 app.config['JSON_AS_ASCII'] = False
 
 # ルート
-@app.route('/')
+@app.route('/openpc')
 def index():
 	return render_template('index.html')
 
 # すべての教室の状況
-@app.route('/api/v1/<int:campus>')
+@app.route('/openpc/api/v1/<int:campus>')
 def json(campus):
 # 存在しないキャンパスを指定された場合
 	if not (campus == 1 or campus == 2):
@@ -41,7 +41,7 @@ def json(campus):
 	return jsonify(result)
 
 # 開いてる教室の状況
-@app.route('/api/v1/<int:campus>/open')
+@app.route('/openpc/api/v1/<int:campus>/open')
 def open(campus):
 # 存在しないキャンパスを指定された場合
 	if not (campus == 1 or campus == 2):

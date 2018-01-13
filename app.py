@@ -77,7 +77,6 @@ def get_room_status(campus):
 		if not (room_status == '閉室' or room_status == '授業中'):
 			detail = {}
 			number = room_status.split('/')
-			print(number)
 			detail['free'] = number[0]
 			detail['max'] = number[1]
 			room_result[room_name] = detail

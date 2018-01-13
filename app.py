@@ -72,8 +72,17 @@ def get_room_status(campus):
 		room_name = room[0].text
 		room_status = room[1].get_text()
 		room_status = room_status.replace('\r\n','')
-		# print(f'{room_name} - {room_status}')
-		room_result[room_name] = room_status
+
+# 閉室じゃない場合更に詳細取得
+		if not (room_status == '閉室' or room_status == '授業中'):
+			detail = {}
+			number = room_status.split('/')
+			print(number)
+			detail['free'] = number[0]
+			detail['max'] = number[1]
+			room_result[room_name] = detail
+		else:
+			room_result[room_name] = room_status
 
 # 結果
 	result = {

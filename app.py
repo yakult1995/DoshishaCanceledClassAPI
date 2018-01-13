@@ -25,6 +25,7 @@ app.config['JSON_AS_ASCII'] = False
 def index():
 	return 'index'
 
+# すべての教室の状況
 @app.route('/api/v1/<int:campus>')
 def json(campus):
 # 存在しないキャンパスを指定された場合
@@ -39,16 +40,23 @@ def json(campus):
 	
 	return jsonify(result)
 
-# @app.route('/<name>')
-# def hello(name=''):
-# 	if name == '':
-# 		name = u'ななしさん'
-# 	# return render_template('hello.html', name=name)
-# 	return name
+# 開いてる教室の状況
+@app.route('/api/v1/<int:campus>/open')
+def open(campus):
+# 存在しないキャンパスを指定された場合
+	if not (campus == 1 or campus == 2):
+		return '存在しないキャンパスです'
 
+# webのスクレイピング開始
+	if campus == 1:
+		result = get_room_status(1, mode='open')
+	elif campus == 2:
+		result = get_room_status(2, mode='open')
+	
+	return jsonify(result)
 
 # 教室状況取得メソッド
-def get_room_status(campus):
+def get_room_status(campus, mode='all'):
 # 現在時刻取得
 	date = datetime.now(JST).strftime("%H:%M:%S")
 
@@ -81,7 +89,8 @@ def get_room_status(campus):
 			detail['max'] = number[1]
 			room_result[room_name] = detail
 		else:
-			room_result[room_name] = room_status
+			if mode == 'all':
+				room_result[room_name] = room_status
 
 # 結果
 	result = {

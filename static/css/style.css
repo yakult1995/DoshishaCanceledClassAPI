@@ -6,6 +6,16 @@ body, html {
 	text-align: center;
 }
 
+a {
+	text-decoration: none;
+}
+
+table {
+	margin: auto;
+	border-style: solid;
+	width: 80%;
+}
+
 #title {
 	font-size: 1.5em;
 }
@@ -15,5 +25,12 @@ body, html {
 	border-style: solid;
 }
 
-#api_url {
+#api_name {
+	text-decoration: underline;
+}
+
+#api_url:before {
+	content: 'API_URL : ';
+	font-family: 'Avnir';
+
 }

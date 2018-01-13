@@ -21,9 +21,14 @@ app.config['DEBUG'] = True
 app.config['JSON_AS_ASCII'] = False
 
 # ルート
-@app.route('/openpc')
+@app.route('/')
 def index():
 	return render_template('index.html')
+
+# OPENPCのindex
+@app.route('/openpc')
+def openpc():
+	return render_template('openpc_index.html')
 
 # すべての教室の状況
 @app.route('/openpc/api/v1/<int:campus>')

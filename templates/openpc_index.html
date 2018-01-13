@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+	<title>Doshisha Open Data Hack</title>
+</head>
+<body>
+	<p id="title">同志社パソコン利用状況</p>
+	<div id="explain">
+		<table class="table">
+			<thead>
+				<tr>
+					<td>概要</td>
+					<td>全件取得</td>
+				</tr>
+			</thead>
+			<tr>
+				<td>API_URL</td>
+				<td>http://hack.doshisha.work/openpc/api/v1/'campusID'/</td>
+			</tr>
+			<tr>
+				<td>campusID</td>
+				<td>今出川 => 1, 京田辺 => 2</td>
+			</tr>
+			<tr>
+				<td>説明</td>
+				<td>キャンパスごとの空き状況を取得</td>
+			</tr>
+		</table>
+		<table class="table">
+			<thead>
+				<tr>
+					<td>概要</td>
+					<td>開き教室検索</td>
+				</tr>
+			</thead>
+			<tr>
+				<td>API_URL</td>
+				<td>http://hack.doshisha.work/openpc/api/v1/'campusID'/open</td>
+			</tr>
+			<tr>
+				<td>説明</td>
+				<td>キャンパスごとに開いている教室の状況ののみを取得</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

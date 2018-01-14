@@ -21,13 +21,14 @@ table {
 }
 
 #api_list {
-	width: 60%;
+	width: 80%;
 	margin: auto;
 }
 
 #api_details {
 	margin: 10px;
 	border-style: solid;
+	width: 100%;
 }
 
 #api_name {
@@ -42,6 +43,6 @@ table {
 }
 
 #explain {
-	width: 70%;
+	width: 80%;
 	margin: auto;
 }

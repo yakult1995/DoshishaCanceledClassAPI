@@ -13,11 +13,16 @@ a {
 table {
 	margin: auto;
 	border-style: solid;
-	width: 80%;
+	width: 100%;
 }
 
 #title {
 	font-size: 1.5em;
+}
+
+#api_list {
+	width: 60%;
+	margin: auto;
 }
 
 #api_details {
@@ -34,4 +39,9 @@ table {
 	content: 'API_URL : ';
 	font-family: 'Avnir';
 
+}
+
+#explain {
+	width: 70%;
+	margin: auto;
 }

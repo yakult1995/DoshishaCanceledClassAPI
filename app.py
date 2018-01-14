@@ -30,20 +30,25 @@ def index():
 def openpc():
 	return render_template('openpc_index.html')
 
+# CANCELLのindex
+@app.route('/cancell')
+def cancell():
+	return render_template('cancell_index.html')
+
+# -------------------
+# OPENPC API
+# -------------------
+
 # すべての教室の状況
 @app.route('/openpc/api/v1/<int:campus>')
-def json(campus):
+def pc(campus):
 # 存在しないキャンパスを指定された場合
 	if not (campus == 1 or campus == 2):
 		return '存在しないキャンパスです'
-
+	else:
 # webのスクレイピング開始
-	if campus == 1:
-		result = get_room_status(1)
-	elif campus == 2:
-		result = get_room_status(2)
-	
-	return jsonify(result)
+		result = get_room_status(campus)
+		return jsonify(result)
 
 # 開いてる教室の状況
 @app.route('/openpc/api/v1/<int:campus>/open')
@@ -51,14 +56,10 @@ def open(campus):
 # 存在しないキャンパスを指定された場合
 	if not (campus == 1 or campus == 2):
 		return '存在しないキャンパスです'
-
+	else:
 # webのスクレイピング開始
-	if campus == 1:
-		result = get_room_status(1, mode='open')
-	elif campus == 2:
-		result = get_room_status(2, mode='open')
-	
-	return jsonify(result)
+		result = get_room_status(campus, mode='open')
+		return jsonify(result)
 
 # 教室状況取得メソッド
 def get_room_status(campus, mode='all'):
@@ -99,7 +100,7 @@ def get_room_status(campus, mode='all'):
 
 # 結果
 	result = {
-		"Result":{
+		"data":{
 			"campus": campus_name,
 			"date": date
 		}
@@ -109,6 +110,67 @@ def get_room_status(campus, mode='all'):
 	return result
 # ここまで
 # 教室状況取得メソッド
+
+# -------------------
+# CANCELL API
+# -------------------
+
+@app.route('/cancell/api/v1/<int:campus>')
+def cancel(campus):
+	# 存在しないキャンパスを指定された場合
+	if not (campus == 1 or campus == 2 or campus == 3):
+		return '存在しないキャンパスです'
+	else:
+		result = get_cancelled_class(campus)
+		return jsonify(result)
+
+# 休講情報取得メソッド
+def get_cancelled_class(campus):
+# 現在時刻取得
+	date = datetime.now(JST).strftime("%m月%d日 %H:%M:%S")
+
+# キャンパス名設定
+	if campus == 1:
+		campus_name = '今出川'
+	elif campus == 2:
+		campus_name = '京田辺'
+	elif campus == 3:
+		campus_name = '大学院'
+
+# データ収集
+	html = urllib.request.urlopen('https://duet.doshisha.ac.jp/kokai/html/fi/fi050/FI05001G.html')
+	soup = BeautifulSoup(html, "lxml")
+	rows = soup.find_all('table', class_='data table')
+	cancelled_class = {}
+	for c, row in enumerate(rows):
+		if c == campus - 1:
+			print('---------')
+			for i, subject in enumerate(row.find_all('tr')):
+				if i == 0:
+					continue
+				classes = {}
+				print(i)
+				for j, detail in enumerate(subject.find_all('td')):
+					if j % 4 == 0:
+						classes['class_hour'] = detail.text
+					elif j % 4 == 1:
+						classes['class_name'] = detail.text
+					elif j % 4 == 2:
+						classes['calss_teacher'] = detail.text
+					elif j % 4 == 3:
+						classes['class_cause'] = detail.text
+				print(classes)
+				cancelled_class[i] = classes
+				classes = {}
+
+	result = {
+		"data":{
+			"campus": campus_name,
+			"date": date
+		}
+	}
+	result['cancelled_classes'] = cancelled_class
+	return result
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))

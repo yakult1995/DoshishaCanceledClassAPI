@@ -115,7 +115,7 @@ def get_room_status(campus, mode='all'):
 # CANCELL API
 # -------------------
 
-@app.route('/cancell/api/v1/<int:campus>')
+@app.route('/cancell/api/v1/<int:campus>/today')
 def cancel(campus):
 	# 存在しないキャンパスを指定された場合
 	if not (campus == 1 or campus == 2 or campus == 3):

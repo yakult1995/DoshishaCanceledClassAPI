@@ -115,17 +115,17 @@ def get_room_status(campus, mode='all'):
 # CANCELL API
 # -------------------
 
-@app.route('/cancell/api/v1/<int:campus>/today')
-def cancel(campus):
+@app.route('/cancell/api/v1/<int:campus>/<string:target_day>')
+def cancel(campus, target_day):
 	# 存在しないキャンパスを指定された場合
 	if not (campus == 1 or campus == 2 or campus == 3):
 		return '存在しないキャンパスです'
 	else:
-		result = get_cancelled_class(campus)
+		result = get_cancelled_class(campus, target_day)
 		return jsonify(result)
 
 # 休講情報取得メソッド
-def get_cancelled_class(campus):
+def get_cancelled_class(campus, target_day):
 # 現在時刻取得
 	date = datetime.now(JST).strftime("%m月%d日 %H:%M:%S")
 
@@ -137,8 +137,22 @@ def get_cancelled_class(campus):
 	elif campus == 3:
 		campus_name = '大学院'
 
+# 結果用配列
+	result = {
+		"data":{
+			"campus": campus_name,
+			"date": date
+		}
+	}
+
 # データ収集
-	html = urllib.request.urlopen('https://duet.doshisha.ac.jp/kokai/html/fi/fi050/FI05001G.html')
+	if target_day == 'today':
+		html = urllib.request.urlopen('https://duet.doshisha.ac.jp/kokai/html/fi/fi050/FI05001G.html')
+	elif target_day == 'tomorrow':
+		html = urllib.request.urlopen('https://duet.doshisha.ac.jp/kokai/html/fi/fi050/FI05001G_02.html')
+	else:
+		result['error'] = '実装されてない検索日です'
+		return result
 	soup = BeautifulSoup(html, "lxml")
 	rows = soup.find_all('table', class_='data table')
 	cancelled_class = {}
@@ -163,12 +177,6 @@ def get_cancelled_class(campus):
 				cancelled_class[i] = classes
 				classes = {}
 
-	result = {
-		"data":{
-			"campus": campus_name,
-			"date": date
-		}
-	}
 	result['cancelled_classes'] = cancelled_class
 	return result
 

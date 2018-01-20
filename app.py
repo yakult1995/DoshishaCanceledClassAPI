@@ -164,7 +164,7 @@ def get_cancelled_class(campus, target_day):
 
 	soup = BeautifulSoup(html, "lxml")
 	rows = soup.find_all('table', class_='data table')
-	cancelled_class = {}
+	cancelled_class = []
 	for c, row in enumerate(rows):
 		if c == campus - 1:
 			print('---------')
@@ -183,7 +183,7 @@ def get_cancelled_class(campus, target_day):
 					elif j % 4 == 3:
 						classes['class_cause'] = detail.text
 				print(classes)
-				cancelled_class[i] = classes
+				cancelled_class.append(classes)
 				classes = {}
 
 	result['cancelled_classes'] = cancelled_class

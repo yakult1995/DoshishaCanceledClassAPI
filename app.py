@@ -76,7 +76,7 @@ def get_room_status(campus, mode='all'):
 	soup = BeautifulSoup(html, "lxml")
 # trを全て抽出
 	rows = soup.find_all("tr", {"style": "font-weight:bold"})
-	room_result = {}
+	room_result = []
 	room_name = ""
 	room_status = ""
 
@@ -91,12 +91,17 @@ def get_room_status(campus, mode='all'):
 		if not (room_status == '閉室' or room_status == '授業中'):
 			detail = {}
 			number = room_status.split('/')
+			detail['room'] = room_name
 			detail['free'] = number[0]
 			detail['max'] = number[1]
-			room_result[room_name] = detail
+			room_result.append(detail)
 		else:
 			if mode == 'all':
-				room_result[room_name] = room_status
+				detail = {
+					'room': room_name,
+					'status': room_status
+				}
+				room_result.append(detail)
 
 # 結果
 	result = {

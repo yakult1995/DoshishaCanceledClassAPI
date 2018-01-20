@@ -13,8 +13,6 @@ from datetime import datetime, timezone, timedelta
 import urllib.request
 from bs4 import BeautifulSoup
 
-JST = timezone(timedelta(hours =+ 0), 'JST')
-
 app = Flask(__name__)
 app.config['DEBUG'] = True
 # 日本語文字化け対策
@@ -132,7 +130,7 @@ def cancel(campus, target_day):
 # 休講情報取得メソッド
 def get_cancelled_class(campus, target_day):
 # 現在時刻取得
-	date = datetime.now(JST).strftime("%m月%d日 %H:%M:%S")
+	date = datetime.now().strftime("%m月%d日 %H:%M:%S")
 
 # キャンパス名設定
 	if campus == 1:

@@ -160,7 +160,7 @@ def get_cancelled_class(campus, target_day):
 	else:
 		result['error'] = '実装されてない検索日です'
 		return result
-	result['search_day'] = search_day
+	result['data']['search_day'] = search_day
 
 	soup = BeautifulSoup(html, "lxml")
 	rows = soup.find_all('table', class_='data table')

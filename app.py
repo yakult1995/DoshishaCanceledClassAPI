@@ -153,6 +153,10 @@ def get_cancelled_class(campus, target_day):
 		html = urllib.request.urlopen('https://duet.doshisha.ac.jp/kokai/html/fi/fi050/FI05001G_02.html')
 		tomorrow = datetime.now(JST) + timedelta(1)
 		search_day = tomorrow.strftime("%m月%d日")
+	elif target_day == 'dad':
+		html = urllib.request.urlopen('https://duet.doshisha.ac.jp/kokai/html/fi/fi050/FI05001G_03.html')
+		tomorrow = datetime.now(JST) + timedelta(1)
+		search_day = tomorrow.strftime("%m月%d日")
 	else:
 		result['error'] = '実装されてない検索日です'
 		return result

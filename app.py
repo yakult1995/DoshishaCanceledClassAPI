@@ -62,7 +62,7 @@ def open(campus):
 # 教室状況取得メソッド
 def get_room_status(campus, mode='all'):
 # 現在時刻取得
-	date = datetime.now(JST).strftime("%H:%M:%S")
+	date = datetime.now().strftime("%H:%M:%S")
 
 	if campus == 1:
 		campus_name = '今出川'

@@ -38,7 +38,7 @@ def cancell():
 # -------------------
 
 # すべての教室の状況
-@app.route('/openpc/api/v1/<int:campus>')
+# @app.route('/openpc/api/v1/<int:campus>')
 def pc(campus):
 # 存在しないキャンパスを指定された場合
 	if not (campus == 1 or campus == 2):
@@ -49,7 +49,7 @@ def pc(campus):
 		return jsonify(result)
 
 # 開いてる教室の状況
-@app.route('/openpc/api/v1/<int:campus>/open')
+# @app.route('/openpc/api/v1/<int:campus>/open')
 def open(campus):
 # 存在しないキャンパスを指定された場合
 	if not (campus == 1 or campus == 2):

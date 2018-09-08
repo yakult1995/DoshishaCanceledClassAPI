@@ -15,15 +15,15 @@
   
     ```
     "data": {
-                            "campus": "キャンパス名",
-                            "date": "取得したときの時刻"
-                        },
-                        "cancelled_classes": {
-                            "Index": {
-                                "class_teacher": "担当教授",
-                                "class_cause": "休講理由",
-                                "class_hour": "時間",
-                                "class_name": "授業名"
-                            }
-                        }
+        "campus": "キャンパス名",
+        "date": "取得したときの時刻"
+    },
+    "cancelled_classes": {
+        "Index": {
+            "class_teacher": "担当教授",
+            "class_cause": "休講理由",
+            "class_hour": "時間",
+            "class_name": "授業名"
+        }
+    }
     ```
